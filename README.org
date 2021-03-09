@@ -1,0 +1,13 @@
+#+title: README
+#+PROPERTY: header-args :results output silent
+
+* usage:
+
+#+begin_src sh
+
+make -k
+python3 gen_pose.py
+echo "<?xml version='1.0'?>" > custom_track.sdf
+build/mod_cone_pose input_poses model_single_cone.sdf >> custom_track.sdf 
+
+#+end_src
