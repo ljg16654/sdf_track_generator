@@ -10,6 +10,8 @@
 #include <stdio.h>
 #include <vector>
 
+// #define DEBUGG
+
 using namespace std;
 void           mod_cone_pose(sdf::ElementPtr root, vector<string> poses);
 vector<string> read_lines(const string &);
@@ -17,27 +19,29 @@ vector<string> split_by_space(const string &);
 bool           islegal_line(const string &);
 bool           isfloat_string(const std::string &);
 void           test_islegal_line();
-void           alter_pose(const sdf::ElementPtr &, const vector<string> &,
-                          const string &);
+void           alter_pose(const sdf::ElementPtr &, const vector<string> &);
 const sdf::ElementPtr get_sdf_root(const string &);
 
 int main(int argc, char **argv)
 {
-    if (argc != 4)
+    if (argc != 3)
         {
             cout << "usage: " << argv[0] << " input_poses"
-                 << " input_sdf"
-                 << " output_sdf";
+                 << " input_sdf";
             exit(-1);
         }
 
     vector<string> lines = read_lines(argv[1]);
+#ifdef DEBUGG
     cout << "read lines:\n";
+#endif
     for (auto it : lines)
         {
             if (islegal_line(it))
                 {
+#ifdef DEBUGG
                     cout << it << endl;
+#endif
                 }
             else
                 {
@@ -47,19 +51,8 @@ int main(int argc, char **argv)
 
     string          input_sdf_filename = argv[2];
     sdf::ElementPtr root               = get_sdf_root(input_sdf_filename);
-    alter_pose(root, lines, argv[3]);
-    FILE *fp_output_sdf = fopen(argv[3], "w");
-    if (!fp_output_sdf)
-        {
-            cerr << "unable to open output sdf";
-        }
-
-    FILE fp_old = *stdout; // preserve the original stdout
-    fputs("<?xml version='1.0'?>\n", fp_output_sdf);
-    *stdout = *fp_output_sdf; // redirect stdout to null
+    alter_pose(root, lines);
     root->PrintValues("");
-    fclose(fp_output_sdf);
-    *stdout = fp_old; // restore stdout
     return 0;
 }
 
@@ -160,13 +153,14 @@ const sdf::ElementPtr get_sdf_root(const string &sdf_filename)
     return rootElement;
 }
 
-void alter_pose(const sdf::ElementPtr &root, const vector<string> &lines,
-                const string &output_sdf)
+void alter_pose(const sdf::ElementPtr &root, const vector<string> &lines)
 {
     // obtain the first link Element
     const sdf::ElementPtr model     = root->GetElement("model");
     const std::string     modelName = model->Get<std::string>("name");
+#ifdef DEBUGG
     std::cout << "Found " << modelName << " model!" << std::endl;
+#endif
     sdf::ElementPtr link = model->GetElement("link");
 
     // set name of the link
@@ -183,7 +177,9 @@ void alter_pose(const sdf::ElementPtr &root, const vector<string> &lines,
 
             if (linkPose->Set(lines[i]))
                 {
+#ifdef DEBUGG
                     cout << "name and pose set for " << i + 1 << "th cone\n";
+#endif
                 }
             else
                 {

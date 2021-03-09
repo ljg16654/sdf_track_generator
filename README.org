@@ -1,10 +1,14 @@
 #+title: README
 #+PROPERTY: header-args :results output silent
 
+The little project generate [[http://sdformat.org/][sdf]] files for tracks given arbitrary
+alignment of cones. The models are provided by [[https://github.com/eufsa/eufs_sim][EUFS simulation]].
+
 * usage:
 
 #+begin_src sh
 
+mkdir -p build
 make -k
 python3 gen_pose.py
 echo "<?xml version='1.0'?>" > custom_track.sdf

@@ -2,12 +2,12 @@
 
 import numpy as np
 
-a = np.random.rand(20, 6)
+a = np.random.rand(20, 2)
 
-file = open("a", "w")
+file = open("input_poses", "w")
 
 for i in range(a.shape[0]):
-    row = a[i, :]
+    row = np.concatenate((a[i, :], [0, 0, 0, 0]))
     row_str = " ".join(np.vectorize(str)(row))
     file.write(row_str)
     file.write('\n')
