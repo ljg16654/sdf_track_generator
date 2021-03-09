@@ -1,8 +1,16 @@
 #+title: README
 #+PROPERTY: header-args :results output silent
 
-The little project generate [[http://sdformat.org/][sdf]] files for tracks given arbitrary
+This little project generates [[http://sdformat.org/][sdf]] files for tracks given arbitrary
 alignment of cones. The models are provided by [[https://github.com/eufsa/eufs_sim][EUFS simulation]].
+
+* input poses format
+
+Each line of =input_poses= should be 6 float numbers separated by
+spaces.
+The 6 floats specify the Cartesian coordinates \((x, y, z)\) and Euler angles
+of the cones. Normally the cones are placed on a horizontal plane, so
+the last four are 0's.
 
 * usage:
 
@@ -15,3 +23,7 @@ echo "<?xml version='1.0'?>" > custom_track.sdf
 build/mod_cone_pose input_poses model_single_cone.sdf >> custom_track.sdf 
 
 #+end_src
+
+Currently =input_poses= contains random numbers which do not make any
+sense. Hopefully =gen_pose.py= will soon be replaced by something that
+involves slightly more sophisticated algorithms.
