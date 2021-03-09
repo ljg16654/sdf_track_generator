@@ -18,24 +18,7 @@
         </geometry>
       </visual>
     </link>
-    <link name='link_0_clone'>
-      <pose frame=''>-12.7541 12.8712 0.079001 0 -0 0</pose>
-      <collision name="collision">
-        <geometry>
-          <mesh>
-            <uri>model://eufs_description/meshes/cone.dae</uri>
-          </mesh>
-        </geometry>
-      </collision>
-      <visual name="visual">
-        <geometry>
-          <mesh>
-            <uri>model://eufs_description/meshes/cone.dae</uri>
-          </mesh>
-        </geometry>
-      </visual>
-    </link>
-    <static>0</static>
+     <static>0</static>
     <allow_auto_disable>1</allow_auto_disable>
   </model>
 </sdf>

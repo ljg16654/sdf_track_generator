@@ -5,5 +5,5 @@ find_package(SDFormat REQUIRED)
 
 include_directories(${SDFormat_INCLUDE_DIRS})
 
-add_executable(check_sdf check_sdf.cc)
-target_link_libraries(check_sdf ${SDFormat_LIBRARIES})
+add_executable(mod_cone_pose mod_cone_pose.cc)
+target_link_libraries(mod_cone_pose ${SDFormat_LIBRARIES})

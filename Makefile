@@ -1,7 +1,7 @@
 .ONESHELL:
-all: parse_sdf
+all: cmake
 
-parse_sdf:
+cmake:
 	cd build
 	cmake ..
 	$(MAKE)
