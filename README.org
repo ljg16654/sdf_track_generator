@@ -13,7 +13,6 @@ SDFormat libraries should be installed. If you are using ubuntu,
 sudo apt install libsdformat6-dev
 #+end_src
 
-
 * input poses format
 
 Each line of =input_poses= should be 2 float numbers separated by

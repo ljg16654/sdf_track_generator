@@ -192,7 +192,7 @@ void alter_pose(const sdf::ElementPtr &root, const vector<string> &lines)
                     // string("cone_") + std::to_string(i +
                     // 2); link->AddElement(name_next_cone);
                     sdf::ElementPtr next_link = link->Clone();
-                    root->InsertElement(next_link);
+                    model->InsertElement(next_link);
                     link = next_link;
                 }
         }
