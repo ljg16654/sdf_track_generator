@@ -1,5 +1,5 @@
-// read from text file cone_pose containing 6 floats on each line:
-// x y z roll pitch yaw
+// read from text file cone_pose containing 2 floats on each line:
+// x y 
 // read SDF model from model.sdf and modify the values of the elements
 // so that the poses of the cones match those specified in cone_pose
 #include "sdf/Element.hh"
@@ -100,7 +100,7 @@ void test_islegal_line()
 bool islegal_line(const string &line)
 {
     vector<string> maybe_numbers = split_by_space(line);
-    if (maybe_numbers.size() != 6)
+    if (maybe_numbers.size() != 2)
         {
             return false;
         }
@@ -168,14 +168,15 @@ void alter_pose(const sdf::ElementPtr &root, const vector<string> &lines)
     int  lines_num        = lines.size();
     bool print_link_value = true;
 
-    for (i = 0; i < lines_num; i++)
+    for (i = 0; i < lines_num - 1; i++)
         {
             const sdf::ElementPtr linkPose = link->GetElement("pose");
             string        name = string("cone_") + std::to_string(i + 1);
             sdf::ParamPtr link_name_param = link->GetAttribute("name");
             link_name_param->SetFromString(name);
+	    string link_pose_str = lines[i] + " 0 0 0 0";
 
-            if (linkPose->Set(lines[i]))
+            if (linkPose->Set(link_pose_str))
                 {
 #ifdef DEBUGG
                     cout << "name and pose set for " << i + 1 << "th cone\n";
@@ -185,7 +186,7 @@ void alter_pose(const sdf::ElementPtr &root, const vector<string> &lines)
                 {
                     cerr << "cannot set pose, abaaba....";
                 }
-            if (i != lines_num - 1)
+            if (i != lines_num - 2)
                 {
                     // string name_next_cone =
                     // string("cone_") + std::to_string(i +

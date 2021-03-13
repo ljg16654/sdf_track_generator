@@ -5,5 +5,6 @@ find_package(SDFormat REQUIRED)
 
 include_directories(${SDFormat_INCLUDE_DIRS})
 
-add_executable(mod_cone_pose mod_cone_pose.cc)
-target_link_libraries(mod_cone_pose ${SDFormat_LIBRARIES})
+add_executable(gen_sdf mod_cone_pose.cc)
+add_executable(gen_track RandomTrackGenerator.cpp)
+target_link_libraries(gen_sdf ${SDFormat_LIBRARIES})
