@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
 set(CMAKE_EXPORT_COMPILE_COMMANDS on)
 find_package(SDFormat REQUIRED)
 
+message("found SDFormat at ${SDFormat_INCLUDE_DIRS}")
 include_directories(${SDFormat_INCLUDE_DIRS})
 
 add_executable(gen_sdf mod_cone_pose.cc)

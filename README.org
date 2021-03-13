@@ -4,6 +4,16 @@
 This little project generates [[http://sdformat.org/][sdf]] files for a random track. The models
 are provided by [[https://github.com/eufsa/eufs_sim][EUFS simulation]].
 
+* dependencies
+
+SDFormat libraries should be installed. If you are using ubuntu,
+=libsdformat-6= can be installed via the command
+
+#+begin_src sh
+sudo apt install libsdformat6-dev
+#+end_src
+
+
 * input poses format
 
 Each line of =input_poses= should be 2 float numbers separated by
